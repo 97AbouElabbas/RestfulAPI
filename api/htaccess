@@ -4,4 +4,12 @@ php_value display_errors 1
 RewriteEngine On # Turn on the rewriting engine
 RewriteRule ^api/func/vehicles/?$ api/func/getvehicles.php [NC,L]
 RewriteRule ^api/func/vehicles/([0-9]+)/?$ api/func/getvehiclebyid.php?id=$1 [NC,L]
+RewriteRule ^api/func/vehicles/history/([0-9]+)/?$ api/func/getvehicelhistory.php?id=$1 [NC,L]
+RewriteRule ^api/func/vehicles/insert/?$ api/func/insertvehiclehistory.php [NC,L]
+RewriteRule ^api/func/carmaintenance/?$ api/func/getcarmaintenance.php [NC,L]
+RewriteRule ^api/func/carmaintenance/([0-9]+)/?$ api/func/getcarmaintenancerange.php?id=$1 [NC,L]
+RewriteRule ^api/func/RSU/?$ api/func/getrsu.php [NC,L]
+RewriteRule ^api/func/RSU/([0-9]+)/?$ api/func/getrsubyid.php?id=$1 [NC,L]
+RewriteRule ^api/func/RSU/history/([0-9]+)/?$ api/func/getrsuhistory.php?id=$1 [NC,L]
+RewriteRule ^api/func/RSU/insert/?$ api/func/insertrsuhistory.php [NC,L]
 # DO NOT REMOVE OR MODIFY THIS LINE AND THE LINES ABOVE HTID:12815601:
