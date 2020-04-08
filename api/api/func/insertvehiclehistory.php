@@ -20,7 +20,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $response ['msg'] = "Error";
     echo json_encode($response);
   }
-} else {
+} 
+elseif($_SERVER['REQUEST_METHOD'] == 'POST'){
+  $db = new dbHandler();
+  $result = $db->insertVehicleHistory($_POST['vehicleId'], $_POST['case'], $_POST['caseNote'], $_POST['caseLat'],
+                                      $_POST['caseLong'], $_POST['caseState']);
+  if ($result) {
+    $response ['msg'] = "Data inserted";
+    echo json_encode($response);
+  } else {
+    $response ['msg'] = "Error";
+    echo json_encode($response);
+  }
+}
+else {
   $response ['error'] = true;
   $response ['msg'] = "Required fields are missing";
   echo json_encode($response);
