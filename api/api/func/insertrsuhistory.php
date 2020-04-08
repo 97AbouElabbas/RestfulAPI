@@ -19,7 +19,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $response ['msg'] = "Error";
     echo json_encode($response);
   }
-} else {
+} 
+elseif($_SERVER['REQUEST_METHOD'] == 'POST'){
+  $db = new dbHandler();
+  $result = $db->insertRSUHistory($_POST['rsuId'], $_POST['case'], $_POST['caseNote'], $_POST['caseState']);
+  if ($result) {
+    $response ['msg'] = "Data inserted";
+    header('Content-Type: application/json');
+    echo json_encode($response);
+  } else {
+    $response ['msg'] = "No Data";
+    echo json_encode($response);
+  }
+}
+else {
   $response ['error'] = true;
   $response ['msg'] = "Required fields are missing";
   echo json_encode($response);
