@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       while($row = $result->fetch_assoc()) {
         $vehicle = new Vehicle($row["VEHICLE_ID"], $row["VEHICLE_OWNER_NAME"], $row["VEHICLE_OWNER_EMAIL"], $row["VEHICLE_MODEL_NAME"], 
                                 $row["VEHICLE_MODEL_YEAR"],
-                                $row["VEHICLE_STATE_FLAG"], $row["VEHICLE_LAT"], $row["VEHICLE_LONG"], $row["VEHICLE_EMERG_NOTE"]);
+                                $row["VEHICLE_LAT"], $row["VEHICLE_LONG"], $row["VEHICLE_STATE_FLAG"], $row["VEHICLE_EMERG_NOTE"]);
         //echo $row["VEHICLE_ID"];
         //echo json_encode($row["VEHICLE_OWNER_NAME"]);
         array_push($vehicles, json_decode(json_encode($vehicle), true));
