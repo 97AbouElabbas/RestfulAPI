@@ -1,6 +1,11 @@
+# Abdelrahman Abou-Elabbas
+# V2x Project
+
 
 php_value display_errors 1
-RewriteEngine On # Turn on the rewriting engine
+# Turn on the rewriting engine
+# Options +FollowSymlinks
+RewriteEngine On 
 RewriteRule ^api/vehicles/?$ api/func/getvehicles.php [NC,L]
 RewriteRule ^api/vehicles/([0-9]+)/?$ api/func/getvehiclebyid.php?id=$1 [NC,L]
 RewriteRule ^api/vehicles/history/([0-9]+)/?$ api/func/getvehicelhistory.php?id=$1 [NC,L]
