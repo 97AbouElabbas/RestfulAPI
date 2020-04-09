@@ -19,7 +19,6 @@ class VehicleHistory{
     public $caseState;
 
     //Constructors
-
     function __construct($vehicleHistoryId, $vehicleId, $case, $caseNote,
                           $caseLat, $caseLong, $caseState) {
         $this->vehicleHistoryId = $vehicleHistoryId;

@@ -17,7 +17,6 @@ class RSUHistory{
     public $caseState;
 
     //Constructors
-
     function __construct($RSUHistoryId, $RSUId, $case, $caseNote,$caseState) {
         $this->RSUHistoryId = $RSUHistoryId;
         $this->RSUId = $RSUId;
