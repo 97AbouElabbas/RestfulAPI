@@ -4,15 +4,15 @@
 
 php_value display_errors 1
 # Turn on the rewriting engine
-# Options +FollowSymlinks
-RewriteEngine On 
-RewriteRule ^api/vehicles/?$ api/func/getvehicles.php [NC,L]
-RewriteRule ^api/vehicles/([0-9]+)/?$ api/func/getvehiclebyid.php?id=$1 [NC,L]
-RewriteRule ^api/vehicles/history/([0-9]+)/?$ api/func/getvehicelhistory.php?id=$1 [NC,L]
-RewriteRule ^api/vehicles/insert/?$ api/func/insertvehiclehistory.php [NC,L]
-RewriteRule ^api/carmaintenance/?$ api/func/getcarmaintenance.php [NC,L]
-RewriteRule ^api/carmaintenance/(?:([\d.]+)\,([\d.]+)/){0,1}/?$ api/func/getcarmaintenancerange.php?lat=$1&long=$2 [NC,L]
-RewriteRule ^api/RSU/?$ api/func/getrsu.php [NC,L]
-RewriteRule ^api/RSU/([0-9]+)/?$ api/func/getrsubyid.php?id=$1 [NC,L]
-RewriteRule ^api/RSU/history/([0-9]+)/?$ api/func/getrsuhistory.php?id=$1 [NC,L]
-RewriteRule ^api/RSU/insert/?$ api/func/insertrsuhistory.php [NC,L]
+Options +FollowSymlinks
+RewriteEngine On
+RewriteRule ^api/vehicles/?$ api/requestHander/getvehicles.php [NC,L]
+RewriteRule ^api/vehicles/([0-9]+)/?$ api/requestHander/getvehiclebyid.php?id=$1 [NC,L]
+RewriteRule ^api/vehicles/history/([0-9]+)/?$ api/requestHander/getvehicelhistory.php?id=$1 [NC,L]
+RewriteRule ^api/vehicles/insert/?$ api/requestHander/insertvehiclehistory.php [NC,L]
+RewriteRule ^api/carmaintenance/?$ api/requestHander/getcarmaintenance.php [NC,L]
+RewriteRule ^api/carmaintenance/(?:([\d.]+)\,([\d.]+)/){0,1}/?$ api/requestHander/getcarmaintenancerange.php?lat=$1&long=$2 [NC,L]
+RewriteRule ^api/RSU/?$ api/requestHander/getrsu.php [NC,L]
+RewriteRule ^api/RSU/([0-9]+)/?$ api/requestHander/getrsubyid.php?id=$1 [NC,L]
+RewriteRule ^api/RSU/history/([0-9]+)/?$ api/requestHander/getrsuhistory.php?id=$1 [NC,L]
+RewriteRule ^api/RSU/insert/?$ api/requestHander/insertrsuhistory.php [NC,L]
