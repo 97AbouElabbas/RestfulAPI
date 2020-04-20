@@ -8,8 +8,9 @@ Options +FollowSymlinks
 RewriteEngine On
 RewriteRule ^api/vehicles/?$ api/requestHander/getvehicles.php [NC,L]
 RewriteRule ^api/vehicles/([0-9]+)/?$ api/requestHander/getvehiclebyid.php?id=$1 [NC,L]
+RewriteRule ^api/vehicles/update/([0-9]+)/(?:([\d.]+)\,([\d.]+)/){0,1}?$ api/requestHander/updateVehicleLocation.php?vehicleId=$1&vehicleLat=$2&vehicleLong=$3 [NC,L]
 RewriteRule ^api/vehicles/history/([0-9]+)/?$ api/requestHander/getvehicelhistory.php?id=$1 [NC,L]
-RewriteRule ^api/vehicles/insert/?$ api/requestHander/insertvehiclehistory.php [NC,L]
+RewriteRule ^api/vehicles/history/insert/?$ api/requestHander/insertvehiclehistory.php [NC,L]
 RewriteRule ^api/carmaintenance/?$ api/requestHander/getcarmaintenance.php [NC,L]
 RewriteRule ^api/carmaintenance/(?:([\d.]+)\,([\d.]+)/){0,1}/?$ api/requestHander/getcarmaintenancerange.php?lat=$1&long=$2 [NC,L]
 RewriteRule ^api/RSU/?$ api/requestHander/getrsu.php [NC,L]

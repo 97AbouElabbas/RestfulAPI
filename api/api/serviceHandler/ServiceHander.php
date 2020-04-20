@@ -58,6 +58,23 @@ class ServiceHander extends RestLib {
     $this ->encodeData('application/json', $responseData);
   }
 
+  public function updateVehicleLocation($vehicleLat, $vehicleLong, $vehicleId){
+    $responseData = array();
+    $db = new dbHandler();
+    $result = $db->updateVehicleLocation($vehicleLat, $vehicleLong, $vehicleId);
+    if ($result) {
+      $statusCode = 200;
+      $responseData ['msg'] = "Data Updated";
+    } else {
+      $statusCode = 404;
+      $responseData ['msg'] = "Error";
+    }
+
+    $requestContentType = $_SERVER['HTTP_ACCEPT'];
+  	$this ->setHttpHeaders('application/json', $statusCode);
+    $this ->encodeData('application/json', $responseData);
+  }
+
   public function getvehicelhistory($id){
     $responseData = array();
     $db = new dbHandler();

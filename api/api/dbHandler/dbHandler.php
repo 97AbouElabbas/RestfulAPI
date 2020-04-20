@@ -33,6 +33,18 @@ class dbHandler {
     return $result;
 	}
 
+  public function updateVehicleLocation($vehicleLat, $vehicleLong, $vehicleId){
+    $sql = "UPDATE VEHICLES SET VEHICLE_LAT = ".$vehicleLat." ,VEHICLE_LONG = ".$vehicleLong."WHERE VEHICLE_ID = ".$vehicleId."";
+    if($this->con->query($sql) === TRUE){
+      $this->con->commit();
+      $this->con->close();
+      return TRUE;
+    }else{
+      $this->con->close();
+      return FALSE;
+    }
+  }
+
   public function getVehicleHistory($vehicleId){
 		$sql = "SELECT * FROM VEHICLES_HISTORY WHERE VEHICLE_ID = ".$vehicleId."";
     $result = $this->con->query($sql);
