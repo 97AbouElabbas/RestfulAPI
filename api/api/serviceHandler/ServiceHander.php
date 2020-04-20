@@ -5,6 +5,7 @@ require_once '../entities/Vehicle.php';
 require_once '../entities/VehicleHistory.php';
 require_once '../entities/RSU.php';
 require_once '../entities/RSUHistory.php';
+require_once '../entities/CarMantanence.php';
 require_once '../dbHandler/dbHandler.php';
 
 class ServiceHander extends RestLib {
