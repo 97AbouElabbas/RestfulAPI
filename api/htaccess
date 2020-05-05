@@ -1,3 +1,4 @@
+
 # Abdelrahman Abou-Elabbas
 # V2x Project
 
@@ -15,5 +16,8 @@ RewriteRule ^api/carmaintenance/?$ api/api/requestHander/getcarmaintenance.php [
 RewriteRule ^api/carmaintenance/(?:([\d.]+)\,([\d.]+)/){0,1}/?$ api/api/requestHander/getcarmaintenancerange.php?lat=$1&long=$2 [NC,L]
 RewriteRule ^api/RSU/?$ api/api/requestHander/getrsu.php [NC,L]
 RewriteRule ^api/RSU/([0-9]+)/?$ api/api/requestHander/getrsubyid.php?id=$1 [NC,L]
+RewriteRule ^api/RSU/update/?$ api/api/requestHander/updatersustate.php [NC,L]
 RewriteRule ^api/RSU/history/([0-9]+)/?$ api/api/requestHander/getrsuhistory.php?id=$1 [NC,L]
-RewriteRule ^api/RSU/insert/?$ api/api/requestHander/insertrsuhistory.php [NC,L]
+RewriteRule ^api/RSU/history/insert/?$ api/api/requestHander/insertrsuhistory.php [NC,L]
+
+
