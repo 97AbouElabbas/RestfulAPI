@@ -136,16 +136,34 @@ class ServiceHander extends RestLib {
   public function getRSUById($id){
     $responseData = array();
     $db = new dbHandler();
-    $result = $db->getRSUById($id);
-    if ($result->num_rows > 0) {
-      $statusCode = 200;
-      while($row = $result->fetch_assoc()) {
-        $responseData = new RSU($row["RSU_ID"], $row["RSU_LONG"], $row["RSU_LAT"],
-                        $row["RSU_EMERG_NOTES"], $row["RSU_STATE"]);
+    if($db->resetRSUHistory() == TRUE){
+      $result = $db->getRSUById($id);
+      if ($result->num_rows > 0) {
+        $statusCode = 200;
+        while($row = $result->fetch_assoc()) {
+          $responseData = new RSU($row["RSU_ID"], $row["RSU_LONG"], $row["RSU_LAT"],
+                          $row["RSU_EMERG_NOTES"], $row["RSU_STATE"]);
+        }
+      } else {
+        $statusCode = 404;
+        $responseData ['msg'] = "No Data";
       }
+    }
+    $requestContentType = $_SERVER['HTTP_ACCEPT'];
+  	$this ->setHttpHeaders('application/json', $statusCode);
+    $this ->encodeData('application/json', $responseData);
+  }
+
+  public function updateRSUState($rsuId, $RSUState, $RSUEmergNote){
+    $responseData = array();
+    $db = new dbHandler();
+    $result = $db->updateRSUState($rsuId, $RSUState, $RSUEmergNote);
+    if ($result) {
+      $statusCode = 200;
+      $responseData ['msg'] = "Data Updated";
     } else {
       $statusCode = 404;
-      $responseData ['msg'] = "No Data";
+      $responseData ['msg'] = "Error";
     }
     $requestContentType = $_SERVER['HTTP_ACCEPT'];
   	$this ->setHttpHeaders('application/json', $statusCode);

@@ -80,6 +80,18 @@ class dbHandler {
     return $result;
 	}
 
+  public function updateRSUState($rsuId, $RSUState, $RSUEmergNote){
+    $sql = "UPDATE RSU SET `RSU_STATE` = ".$RSUState.", `RSU_EMERG_NOTES` = ".$RSUEmergNote." WHERE `RSU_ID` =".$rsuId."";
+    if($this->con->query($sql) === TRUE){
+      $this->con->commit();
+      $this->con->close();
+      return TRUE;
+    }else{
+      $this->con->close();
+      return FALSE;
+    }
+  }
+
   public function getRSUHistory($rsuId){
 		$sql = "SELECT * FROM RSU_HISTORY WHERE RSU_ID = ".$rsuId."";
     $result = $this->con->query($sql);
@@ -90,6 +102,18 @@ class dbHandler {
   public function insertRSUHistory($RSUId, $case, $caseNote, $caseState){
     $sql = "INSERT INTO `RSU_HISTORY` (`RSU_ID`, `CASE`, `CASE_NOTE`, `CASE_STATE`)
     VALUES ('".$RSUId."', '".$case."', '".$caseNote."', '".$caseState."')";
+    if($this->con->query($sql) === TRUE){
+      $this->con->commit();
+      $this->con->close();
+      return TRUE;
+    }else{
+      $this->con->close();
+      return FALSE;
+    }
+  }
+
+  public function resetRSUHistory(){
+    $sql = "UPDATE `RSU_HISTORY` SET `CASE_STATE` = 0";
     if($this->con->query($sql) === TRUE){
       $this->con->commit();
       $this->con->close();
