@@ -45,6 +45,18 @@ class dbHandler {
     }
   }
 
+  public function updateVehicleState($vehicleStateFlag, $vehicleId){
+    $sql = "UPDATE VEHICLES SET VEHICLE_STATE_FLAG = ".$vehicleLat."WHERE VEHICLE_ID = ".$vehicleId."";
+    if($this->con->query($sql) === TRUE){
+      $this->con->commit();
+      $this->con->close();
+      return TRUE;
+    }else{
+      $this->con->close();
+      return FALSE;
+    }
+  }
+
   public function getVehicleHistory($vehicleId){
 		$sql = "SELECT * FROM VEHICLES_HISTORY WHERE VEHICLE_ID = ".$vehicleId."";
     $result = $this->con->query($sql);
@@ -55,6 +67,18 @@ class dbHandler {
   public function insertVehicleHistory($vehicleId, $case, $caseNote, $caseLat, $caseLong, $caseState){
     $sql = "INSERT INTO `VEHICLES_HISTORY` (`VEHICLE_ID`, `CASE`, `CASE_NOTE`, `CASE_LAT`, `CASE_LONG`, `CASE_STATE`)
     VALUES ('".$vehicleId."', '".$case."', '".$caseNote."', '".$caseLat."', '".$caseLong."', '".$caseState."')";
+    if($this->con->query($sql) === TRUE){
+      $this->con->commit();
+      $this->con->close();
+      return TRUE;
+    }else{
+      $this->con->close();
+      return FALSE;
+    }
+  }
+
+  public function resetVehicleHistory($id){
+    $sql = "UPDATE VEHICLES_HISTORY SET `CASE_STATE` = 0 WHERE `VEHICLE_ID` = ".$id;
     if($this->con->query($sql) === TRUE){
       $this->con->commit();
       $this->con->close();
@@ -112,8 +136,8 @@ class dbHandler {
     }
   }
 
-  public function resetRSUHistory(){
-    $sql = "UPDATE `RSU_HISTORY` SET `CASE_STATE` = 0";
+  public function resetRSUHistory($id){
+    $sql = "UPDATE `RSU_HISTORY` SET `CASE_STATE` = 0 WHERE `RSU_ID` = ".$id;
     if($this->con->query($sql) === TRUE){
       $this->con->commit();
       $this->con->close();

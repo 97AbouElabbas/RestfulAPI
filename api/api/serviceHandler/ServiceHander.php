@@ -76,6 +76,23 @@ class ServiceHander extends RestLib {
     $this ->encodeData('application/json', $responseData);
   }
 
+  public function updateVehicleState($vehicleStateFlag, $vehicleId){
+    $responseData = array();
+    $db = new dbHandler();
+    $result = $db->updateVehicleState($vehicleStateFlag, $vehicleId);
+    if ($result) {
+      $statusCode = 200;
+      $responseData ['msg'] = "Data Updated";
+    } else {
+      $statusCode = 404;
+      $responseData ['msg'] = "Error";
+    }
+
+    $requestContentType = $_SERVER['HTTP_ACCEPT'];
+  	$this ->setHttpHeaders('application/json', $statusCode);
+    $this ->encodeData('application/json', $responseData);
+  }
+
   public function getvehicelhistory($id){
     $responseData = array();
     $db = new dbHandler();
@@ -99,10 +116,28 @@ class ServiceHander extends RestLib {
   public function insertVehicleHistory($vehicleId, $case, $caseNote, $caseLat, $caseLong, $caseState){
     $responseData = array();
     $db = new dbHandler();
+    $db->resetVehicleHistory($vehicleId);
     $result = $db->insertVehicleHistory($vehicleId, $case, $caseNote, $caseLat, $caseLong, $caseState);
     if ($result) {
       $statusCode = 200;
       $responseData ['msg'] = "Data inserted";
+    } else {
+      $statusCode = 404;
+      $responseData ['msg'] = "Error";
+    }
+
+    $requestContentType = $_SERVER['HTTP_ACCEPT'];
+  	$this ->setHttpHeaders('application/json', $statusCode);
+    $this ->encodeData('application/json', $responseData);
+  }
+
+  public function resetVehicleHistory($id){
+    $responseData = array();
+    $db = new dbHandler();
+    $result = $db->resetVehicleHistory($id);
+    if ($result) {
+      $statusCode = 200;
+      $responseData ['msg'] = "Data Updated";
     } else {
       $statusCode = 404;
       $responseData ['msg'] = "Error";
@@ -192,6 +227,7 @@ class ServiceHander extends RestLib {
   public function insertRSUHistory($RSUId, $case, $caseNote, $caseState){
     $responseData = array();
     $db = new dbHandler();
+    $db->resetRSUHistory($RSUId);
     $result = $db->insertRSUHistory($RSUId, $case, $caseNote, $caseState);
     if ($result) {
       $statusCode = 200;
@@ -200,6 +236,23 @@ class ServiceHander extends RestLib {
       $statusCode = 404;
       $responseData ['msg'] = "No Data";
     }
+    $requestContentType = $_SERVER['HTTP_ACCEPT'];
+  	$this ->setHttpHeaders('application/json', $statusCode);
+    $this ->encodeData('application/json', $responseData);
+  }
+
+  public function resetRSUHistory($id){
+    $responseData = array();
+    $db = new dbHandler();
+    $result = $db->resetRSUHistory($id);
+    if ($result) {
+      $statusCode = 200;
+      $responseData ['msg'] = "Data Updated";
+    } else {
+      $statusCode = 404;
+      $responseData ['msg'] = "Error";
+    }
+
     $requestContentType = $_SERVER['HTTP_ACCEPT'];
   	$this ->setHttpHeaders('application/json', $statusCode);
     $this ->encodeData('application/json', $responseData);
